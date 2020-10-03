@@ -7,6 +7,7 @@ package br.com.bandtec.projetojpa2;
  */
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +24,23 @@ public class Produto {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codProduto;
+   
+   @Column(nullable = false, length = 38)
     private String nome;
+   @Column(nullable = false, length = 18)
     private String unidade;
+   @Column(name = "preco_produto")
     private Double preco;
 
+    public Produto() {
+    }
+    
+    public Produto(String nome, String unidade, Double preco) {
+        this.nome = nome;
+        this.unidade = unidade;
+        this.preco = preco;
+    }
+    
     public Integer getCodProduto() {
         return codProduto;
     }

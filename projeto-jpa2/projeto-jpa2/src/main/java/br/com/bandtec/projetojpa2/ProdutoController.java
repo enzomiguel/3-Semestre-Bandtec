@@ -6,12 +6,15 @@
 package br.com.bandtec.projetojpa2;
 
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,11 +36,26 @@ public class ProdutoController {
     }
     
     @GetMapping
-    public ResponseEntity pesquisar(){
-    if(repository.count()>0){
-    return  ResponseEntity.ok(repository.findAll());
-    }else{
-    return  ResponseEntity.noContent().build();
+    public ResponseEntity pesquisar(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false)String unidade,
+            @RequestParam(required = false) Double preco
+    ){
+    Produto produtoPesquisa = new Produto(nome,unidade,preco);
+    
+    List<Produto> produtos = repository.findAll(Example.of(produtoPesquisa));
+    
+        if (produtos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }else {
+        return  ResponseEntity.ok(produtos);
+        }
+    
+    
     }
+    
+    @GetMapping("/caros")
+    public ResponseEntity listaCaros(){
+    return ResponseEntity.ok(repository.pesquisarPorPrecoMaiorQue(6.0));
     }
 }
