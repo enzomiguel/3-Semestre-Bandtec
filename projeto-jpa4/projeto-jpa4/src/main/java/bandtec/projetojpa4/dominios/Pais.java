@@ -14,7 +14,7 @@ public class Pais {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String nome;
+    private String modelo;
     
     
      
@@ -25,7 +25,7 @@ public class Pais {
     }
 
     public String getNome() {
-        return nome;
+        return modelo;
     }
 
     
@@ -35,7 +35,7 @@ public class Pais {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.modelo = modelo;
     }
 
 

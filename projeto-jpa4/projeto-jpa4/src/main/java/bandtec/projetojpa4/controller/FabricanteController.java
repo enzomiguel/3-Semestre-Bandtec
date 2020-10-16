@@ -2,27 +2,23 @@
 package bandtec.projetojpa4.controller;
 
 import bandtec.projetojpa4.repository.CarroRepository;
+
+import bandtec.projetojpa4.repository.FabricanteRepostory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/carros")
-public class CarroController {
+@RequestMapping("/fabricantes")
+public class FabricanteController {
     
-    @Autowired
-    private CarroRepository repository;
+     @Autowired
+    private FabricanteRepostory repository;
     
     @GetMapping
-    public  ResponseEntity getCarros(){
-        return ResponseEntity.ok(repository.findAll());
-    }
-    @GetMapping("/simples")
-    public  ResponseEntity getCarrosSimples(){
+    public  ResponseEntity getFabricanteSimples(){
         return ResponseEntity.ok(repository.findAllSimples());
     }
-    
 }

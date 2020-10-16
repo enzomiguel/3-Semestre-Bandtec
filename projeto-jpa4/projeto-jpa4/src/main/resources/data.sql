@@ -1,5 +1,5 @@
 insert into pais
-(id, nome)
+(id, modelo)
 values
 (null, 'Grecia'),
 (null, 'Italia'),
